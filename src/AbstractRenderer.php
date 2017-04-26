@@ -11,29 +11,28 @@ use \Psr\Http\Message\ResponseInterface;
  */
 abstract class AbstractRenderer implements \ArrayAccess
 {
+    protected $offset = [];
 
-	protected $offset = [];
+    /**
+     * template function.
+     *
+     * @access protected
+     * @abstract
+     * @param mixed $template
+     */
+    abstract protected function template($template);
 
-	/**
-	 * template function.
-	 *
-	 * @access protected
-	 * @abstract
-	 * @param mixed $template
-	 */
-	abstract protected function template($template);
-
-	/**
-	 * render function.
-	 *
-	 * @access public
-	 * @abstract
-	 * @param ResponseInterface $response
-	 * @param mixed $template
-	 * @param mixed $data (default: [])
-	 * @return ResponseInterface
-	 */
-	abstract public function render(ResponseInterface $response, $template, $data = []);
+    /**
+     * render function.
+     *
+     * @access public
+     * @abstract
+     * @param ResponseInterface $response
+     * @param mixed $template
+     * @param mixed $data (default: [])
+     * @return ResponseInterface
+     */
+    abstract public function render(ResponseInterface $response, $template, $data = []);
 
     /**
      * merge_data function.
@@ -43,29 +42,29 @@ abstract class AbstractRenderer implements \ArrayAccess
      * @return array
      */
     protected function merge_data($data)
-	{
-		return array_merge($this->offset, $data);
-	}
+    {
+        return array_merge($this->offset, $data);
+    }
 
-	/**
-	 * loadConfig function.
-	 *
-	 * @access public
-	 * @param array $offset
-	 * @return $this
-	 */
-	public function loadConfig(array $offset)
-	{
-    	$this->offset = $this->merge_data($offset);
+    /**
+     * loadConfig function.
+     *
+     * @access public
+     * @param array $offset
+     * @return $this
+     */
+    public function loadConfig(array $offset)
+    {
+        $this->offset = $this->merge_data($offset);
 
-    	return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * ArrayAccess Implementations
-	 */
+    /**
+     * ArrayAccess Implementations
+     */
 
-	/**
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($key)
@@ -112,5 +111,4 @@ abstract class AbstractRenderer implements \ArrayAccess
     {
         return new \ArrayIterator($this->offset);
     }
-
 }

@@ -28,19 +28,20 @@ final class RenderTest extends \PHPUnit\Framework\TestCase
      * @covers Renderer::getLoader
      * @covers Renderer::getEnvironment
      */
-    public function testEnvironment():void
+    public function testEnvironment()
     {
         $this->assertInstanceOf('Resilient\TwigRenderer', $this->renderer);
         $this->assertInstanceOf('Twig_Loader_Filesystem', $this->renderer->getLoader());
         $this->assertInstanceOf('Twig_Environment', $this->renderer->getEnvironment());
 
+        return;
     }
 
     /**
      * @covers Renderer::render
      * @covers Renderer::template
      */
-    public function testRender():void
+    public function testRender()
     {
         $response = new \Zend\Diactoros\Response();
 
@@ -52,25 +53,28 @@ final class RenderTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals("<h1>${data['title']}</h1>", $response->getBody());
 
+        return;
     }
 
     /**
      * @covers Renderer::renderBlock
      */
-    public function testRenderBlock():void
+    public function testRenderBlock()
     {
         $data = ['title' => 'Big HEAD'];
 
-        $response = $this->renderer->renderBlock('two.twig', 'content',$data);
+        $response = $this->renderer->renderBlock('two.twig', 'content', $data);
 
         $this->assertEquals("<h3>${data['title']}</h3>", trim($response));
+
+        return;
     }
 
     /**
      * @covers Renderer::render
      * @covers Renderer::template
      */
-    public function testOffset():void
+    public function testOffset()
     {
         $data = [];
 
@@ -82,8 +86,8 @@ final class RenderTest extends \PHPUnit\Framework\TestCase
 
         $response = $this->renderer->render(new \Zend\Diactoros\Response(), 'three.twig', $data);
 
-        $this->assertEquals("<a href='$url'>$label</a>", (string) $response->getBody() );
+        $this->assertEquals("<a href='$url'>$label</a>", (string) $response->getBody());
 
+        return;
     }
-
 }
