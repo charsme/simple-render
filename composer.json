@@ -1,5 +1,5 @@
 {
-    "name": "chars/simple-response",
+    "name": "chars/simple-render",
     "description": "Simple response renderer",
     "type": "library",
     "require": {
@@ -7,11 +7,15 @@
         "psr/http-message": "^1.0",
         "psr/cache": "^1.0",
         "romaricdrigon/metayaml": "^1.1",
-        "embed/embed": "^3.0"
+        "embed/embed": "^3.0",
+        "lullabot/amp": "^1.1",
+        "asm89/twig-cache-extension": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0",
-        "chars/simple-http": "dev-master"
+        "phpunit/phpunit": "~6.0.0",
+        "league/route": "^3.0",
+        "league/container": "^2.4",
+        "zendframework/zend-diactoros": "^1.4"
     },
     "license": "MIT",
     "autoload": {
