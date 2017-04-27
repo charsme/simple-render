@@ -2,16 +2,16 @@
 
 namespace Resilient\Twig\Extension;
 
-use \Zend\Diactoros\Uri;
+use \Psr\Http\Message\UriInterface;
 
 /**
-* Twig Router Extension for zendframework/zend-diactoros
+* Twig Router Extension for psr 6  UriInterface
 */
 class Uri extends \Twig_Extension
 {
     private $uri;
 
-    public function __construct(Uri $uri)
+    public function __construct(UriInterface $uri)
     {
         $this->uri = $uri;
     }
@@ -36,9 +36,13 @@ class Uri extends \Twig_Extension
         if (is_string($this->uri)) {
             return $this->uri;
         }
-        if (method_exists($this->uri, 'getBaseUrl')) {
-            return $this->uri->getBaseUrl();
-        }
+
+        $scheme = $this->uri->getScheme();
+        $authority = $this->uri->getAuthority();
+
+        return ($scheme ? $scheme . ':' : '')
+            . ($authority ? '//' . $authority : '');
+
     }
 
     /**
