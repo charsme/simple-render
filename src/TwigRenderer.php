@@ -70,13 +70,13 @@ class TwigRenderer extends AbstractRenderer
      *
      * @access public
      * @param mixed $template
-     * @param mixed $block_name
+     * @param mixed $blockName
      * @param mixed $data (default: [])
      * @return string rendered block
      */
-    public function renderBlock($template, $block_name, $data = [])
+    public function renderBlock($template, $blockName, $data = [])
     {
-        return $this->template($template)->renderBlock($block_name, $this->merge_data($data));
+        return $this->template($template)->renderBlock($blockName, $this->mergeData($data));
     }
 
     /**
@@ -84,7 +84,7 @@ class TwigRenderer extends AbstractRenderer
      */
     public function render(ResponseInterface $response, $template, $data = [])
     {
-        $response->getBody()->write($this->template($template)->render($this->merge_data($data)));
+        $response->getBody()->write($this->template($template)->render($this->mergeData($data)));
 
         return $response;
     }

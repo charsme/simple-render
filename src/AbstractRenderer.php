@@ -35,13 +35,13 @@ abstract class AbstractRenderer implements \ArrayAccess
     abstract public function render(ResponseInterface $response, $template, $data = []);
 
     /**
-     * merge_data function.
+     * mergeData function.
      *
      * @access protected
      * @param mixed $data
      * @return array
      */
-    protected function merge_data($data)
+    protected function mergeData($data)
     {
         return array_merge($this->offset, $data);
     }
@@ -55,7 +55,7 @@ abstract class AbstractRenderer implements \ArrayAccess
      */
     public function loadConfig(array $offset)
     {
-        $this->offset = $this->merge_data($offset);
+        $this->offset = $this->mergeData($offset);
 
         return $this;
     }
