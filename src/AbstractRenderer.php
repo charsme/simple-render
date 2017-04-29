@@ -2,16 +2,18 @@
 
 namespace Resilient;
 
+use \Resilient\Design\RendererInterface;
 use \Psr\Http\Message\ResponseInterface;
+use \Resilient\Traits\ArrayAccessAble;
 
 /**
  * Abstract AbstractRenderer class.
  *
  * @abstract
  */
-abstract class AbstractRenderer implements \ArrayAccess
+abstract class AbstractRenderer implements RendererInterface
 {
-    protected $offset = [];
+    use ArrayAccessAble;
 
     /**
      * template function.
@@ -23,14 +25,12 @@ abstract class AbstractRenderer implements \ArrayAccess
     abstract protected function template($template);
 
     /**
-     * render function.
-     *
-     * @access public
-     * @abstract
-     * @param ResponseInterface $response
-     * @param mixed $template
-     * @param mixed $data (default: [])
-     * @return ResponseInterface
+     * {@inheritdoc}
+     */
+    abstract public function renderBlock($template, $blockName, $data = []);
+
+    /**
+     * {@inheritdoc}
      */
     abstract public function render(ResponseInterface $response, $template, $data = []);
 
@@ -47,68 +47,12 @@ abstract class AbstractRenderer implements \ArrayAccess
     }
 
     /**
-     * loadConfig function.
-     *
-     * @access public
-     * @param array $offset
-     * @return $this
+     * {@inheritdoc}
      */
     public function loadConfig(array $offset)
     {
         $this->offset = $this->mergeData($offset);
 
         return $this;
-    }
-
-    /**
-     * ArrayAccess Implementations
-     */
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($key)
-    {
-        return array_key_exists($key, $this->offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($key)
-    {
-        return $this->offset[$key];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($key, $value)
-    {
-        $this->offset[$key] = $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($key)
-    {
-        unset($this->offset[$key]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function count()
-    {
-        return count($this->offset);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->offset);
     }
 }

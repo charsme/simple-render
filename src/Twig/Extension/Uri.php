@@ -42,7 +42,6 @@ class Uri extends \Twig_Extension
 
         return ($scheme ? $scheme . ':' : '')
             . ($authority ? '//' . $authority : '');
-
     }
 
     /**
