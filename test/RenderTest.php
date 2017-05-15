@@ -90,4 +90,5 @@ final class RenderTest extends \PHPUnit\Framework\TestCase
 
         return;
     }
+
 }
