@@ -3,6 +3,7 @@
     "description": "Simple response renderer",
     "type": "library",
     "require": {
+        "php": "~7.0",
         "twig/twig": "^2.3",
         "psr/http-message": "^1.0",
         "psr/cache": "^1.0",
@@ -23,10 +24,8 @@
             "Resilient\\": "src"
         }
     },
-    "authors": [
-        {
-            "name": "Charis",
-            "email": "me@chars.me"
-        }
-    ]
+    "authors": [{
+        "name": "Charis",
+        "email": "me@chars.me"
+    }]
 }
