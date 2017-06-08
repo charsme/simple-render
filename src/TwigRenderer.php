@@ -20,7 +20,7 @@ class TwigRenderer extends AbstractRenderer
      * __construct function.
      *
      * @access public
-     * @param mixed $path
+     * @param string|array $path
      * @param array $options (default: [])
      */
     public function __construct($path, array $options = [])
