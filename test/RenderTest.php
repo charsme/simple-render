@@ -16,7 +16,7 @@ final class RenderTest extends \PHPUnit\Framework\TestCase
      * @covers Renderer::__construct
      * @covers Renderer::createLoader
      */
-    public function __construct()
+    public function setUp()
     {
         $path = __DIR__.'/view/';
         $opts = [];
