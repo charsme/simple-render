@@ -28,6 +28,10 @@
             "Resilient\\": "src"
         }
     },
+    "scripts": {
+        "test": "./vendor/bin/phpunit",
+        "test:verbose": "./vendor/bin/phpunit -v --debug"        
+    },
     "authors": [{
         "name": "Charis",
         "email": "me@chars.me"
